@@ -1,0 +1,23 @@
+{% include base_path %}
+
+{% assign title = post.title | markdownify | remove: '<p>' | remove: '</p>' %}
+
+<li class="{{ include.type | default: "list" }}__item">
+    <h3 class="publications_item-title">
+      {% if post.paperurl %}
+        <a href="{{ post.paperurl }}">{{ title }}</a>
+      {% else %}
+        {{ title }}
+      {% endif %}
+    </h3>
+
+    <div class="publications_item-info">
+        {{ post.authors }}
+        <br>
+        <i>{{ post.venue }}</i>{% if post.volume %} {{ post.volume }}{% endif %}{% if post.pages %}, {{ post.pages }}{% endif %}, {{ post.date | default: "1900-01-01" | date: "%Y" }}
+    </div>
+
+    <div class="publications_item-excerpt" itemprop="description">
+        {{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}
+    </div>
+</li>

@@ -1,0 +1,30 @@
+{% include base_path %}
+
+<li class="{{ include.type | default: "list" }}__item">
+    <div class="awards_item-title">
+        {{ post.title }} {% if post.status == "ongoing" %}(ongoing){% endif %}
+    </div>
+    <div class="awards_item-info">
+        {{ post.institution }}
+    </div>
+
+    <div class="awards_item-excerpt" itemprop="description">
+        {% if post.status == "ongoing" %}
+            Expected date of end:
+        {% endif %}
+        {{ post.date | date: "%B %Y" }}
+
+        {% if post.thesis %}
+            <br>
+            Thesis: {{ post.thesis | markdownify | remove: '<p>' | remove: '</p>' }}
+        {% endif %}
+        {% if post.advisor %}
+            <br>
+            Advisor: {{ post.advisor | markdownify | remove: '<p>' | remove: '</p>' }}
+        {% endif %}
+        {% if post.score %}
+            <br>
+            Average score: {{ post.score | markdownify | remove: '<p>' | remove: '</p>' }}
+        {% endif %}
+    </div>
+</li>

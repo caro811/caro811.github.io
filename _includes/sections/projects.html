@@ -1,0 +1,46 @@
+{% include base_path %}
+
+{% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+
+<li class="{{ include.type | default: "list" }}__item">
+    <h3 class="archive__item-title" itemprop="headline">
+        {{ title }}
+    </h3>
+
+    {% if post.date %}
+        <p class="page__meta">
+            {{ post.date | date: '%B %Y' }}
+            {% if post.date_end %}
+                - {{ post.date_end | date: '%B %Y' }}
+            {% endif %}
+        </p>
+    {% endif %}
+
+    {% if post.description %}
+        <p class="archive__item-excerpt" itemprop="description" style="margin-bottom: 0">
+            {{ post.description | markdownify | remove: "<p>" | remove: "</p>" }}
+        </p>
+    {% endif %}
+
+    {% if post.contribution %}
+        <p class="archive__item-excerpt" itemprop="description" style="margin-bottom: 0">
+            Contribution: {{ post.contribution | markdownify | remove: "<p>" | remove: "</p>" }}
+        </p>
+    {% endif %}
+
+    {% if post.jointwork %}
+        <p class="archive__item-excerpt" itemprop="description" style="margin-bottom: 0">
+            Joint work with {{ post.jointwork }}.
+        </p>
+    {% endif %}
+
+    {% if post.website %}
+        <p class="archive__item-excerpt" itemprop="description" style="margin-bottom: 0">
+            <a href="{{ post.website }}">Website</a>
+        </p>
+    {% endif %}
+
+    {% if post.image %}
+        <a href="{{ post.image }}"><img src="{{ post.image }}" style='max-height:175px; max-width: 350px; margin-top: 0.5em;'></a>
+    {% endif %}
+</li>

@@ -1,0 +1,16 @@
+{% include base_path %}
+
+<li class="{{ include.type | default: "list" }}__item">
+    <div class="awards_item-title">
+        {{ post.language }}
+    </div>
+    <div class="awards_item-info">
+        {{ post.level }}
+    </div>
+
+    {% if post.exams %}
+        <div class="awards_item-excerpt" itemprop="description">
+            Exams: {{ post.exams | markdownify | remove: '<p>' | remove: '</p>' }}
+        </div>
+    {% endif %}
+</li>

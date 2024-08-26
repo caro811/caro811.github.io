@@ -1,0 +1,10 @@
+{% include base_path %}
+
+<li class="{{ include.type | default: "list" }}__item">
+    <div class="awards_item-title">
+        {{ post.type }}
+    </div>
+    <div class="awards_item-info">
+        {{ post.description }}
+    </div>
+</li>

@@ -1,0 +1,64 @@
+{% include base_path %}
+
+{% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+
+<li class="{{ include.type | default: "list" }}__item">
+    <h3 class="archive__item-title" itemprop="headline">
+        {{ title }}
+    </h3>
+
+    {% if post.venue or post.location or post.date %}
+        <p class="page__meta">
+            {% if post.conference %}
+                {{ post.conference }}.
+            {% endif %}
+            {% if post.location %}
+                {{ post.location }}.
+            {% endif %}
+            {% if post.date %}
+                {% if post.venue or post.location %}
+                    <br>
+                {% endif %}
+                {{ post.date | date: '%B %Y' }}
+            {% endif %}
+        </p>
+    {% endif %}
+
+    {% if post.jointwork %}
+        <p class="archive__item-excerpt" itemprop="description" style="margin-bottom: 0">
+            Joint work with {{ post.jointwork }}.
+        </p>
+    {% endif %}
+
+    {% if post.excerpt %}
+        <p class="archive__item-excerpt" itemprop="description" style="margin-bottom: 0">
+            {{ post.excerpt | markdownify | remove: "<p>" | remove: "</p>" }}
+        </p>
+    {% endif %}
+
+    {% if post.website or post.abstract or post.slides or post.article %}
+        <p class="archive__item-excerpt" itemprop="description" style="margin-bottom: 0">
+            {% if post.website %}
+                <a href="{{ post.website }}">Website</a>
+            {% endif %}
+            {% if post.abstract %}
+                {% if post.website %}
+                    -
+                {% endif %}
+                <a href="{{ post.abstract }}">Abstract</a>
+            {% endif %}
+            {% if post.slides %}
+                {% if post.website or post.abstract %}
+                    -
+                {% endif %}
+                <a href="{{ post.slides }}">Slides</a>
+            {% endif %}
+            {% if post.article %}
+                {% if post.website or post.abstract or post.slides %}
+                    -
+                {% endif %}
+                <a href="{{ post.article }}">Article</a>
+            {% endif %}
+        </p>
+    {% endif %}
+</li>

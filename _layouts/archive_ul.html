@@ -1,0 +1,21 @@
+---
+layout: default
+---
+
+<div id="main" role="main">
+    {% include sidebar.html %}
+
+    <div class="archive">
+        <h1 class="page__title">
+            {{ page.title }}
+        </h1>
+
+        {% if page.description %}
+            <div class="wordwrap">{{ page.description | markdownify | remove: '<p>' | remove: '</p>' }}</div>
+        {% endif %}
+
+        <ul class="archive-list" style="margin-top: 2em;">
+            {{ content }}
+        </ul>
+    </div>
+</div>

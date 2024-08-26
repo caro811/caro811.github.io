@@ -1,0 +1,38 @@
+{% include base_path %}
+
+<li class="{{ include.type | default: "list" }}__item">
+  {% if post.type == "olympiad" %}
+    <div class="awards_item-title">
+      {{ post.institution }}
+    </div>
+    <div class="awards_item-info">
+      {{ post.title }}
+    </div>
+
+    {% if post.excerpt %}
+        <div class="awards_item-excerpt" itemprop="description">
+            {{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}
+        </div>
+    {% endif %}
+  {% else %}
+    <div class="awards_item-title">
+      {{ post.title | markdownify | remove: '<p>' | remove: '</p>' }}
+    </div>
+
+    <div class="awards_item-info">
+        {{ post.institution }}
+    </div>
+
+    {% if post.excerpt %}
+        <div class="awards_item-excerpt" itemprop="description">
+            {{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}
+        </div>
+    {% endif %}
+
+    {% if post.website %}
+        <div class="awards_item-excerpt" itemprop="description">
+            <a href="{{ post.website }}">Website</a>
+        </div>
+    {% endif %}
+  {% endif %}
+</li>

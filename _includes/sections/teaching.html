@@ -1,0 +1,22 @@
+{% include base_path %}
+
+<li class="{{ include.type | default: "list" }}__item">
+    <h3 class="archive__item-title" itemprop="headline">
+        {{ post.title | markdownify | remove: "<p>" | remove: "</p>" }}
+    </h3>
+
+    <div class="archive__item-info">
+        {{ post.position }}
+    </div>
+    <div class="page__meta">
+        {{ post.institution }} ({{ post.location }})
+        <br>
+        {% if post.date_from %}{{ post.date_from | default: "1900-01-01" | date: "%B %Y" }} - {% endif %}{{ post.date | default: "1900-01-01" | date: "%B %Y" }}
+    </div>
+
+    {% if post.excerpt %}
+        <div class="archive__item-excerpt" itemprop="description">
+            {{ post.excerpt | markdownify | remove: "<p>" | remove: "</p>" }}
+        </div>
+    {% endif %}
+</li>
