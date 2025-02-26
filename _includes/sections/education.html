@@ -16,7 +16,11 @@
 
         {% if post.thesis %}
             <br>
-            Thesis: {{ post.thesis | markdownify | remove: '<p>' | remove: '</p>' }}
+            {% if post.thesisurl %}
+                Thesis: <a href="{{ post.thesisurl }}">{{ post.thesis | markdownify | remove: '<p>' | remove: '</p>' }}</a>
+            {% else %}
+                Thesis: {{ post.thesis | markdownify | remove: '<p>' | remove: '</p>' }}
+            {% endif %}
         {% endif %}
         {% if post.advisor %}
             <br>
